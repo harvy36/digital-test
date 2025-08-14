@@ -1,0 +1,42 @@
+# Colección de ejemplos curl para el CRUD de BookViewSet (Django REST Framework)
+# Puedes importar este archivo en Postman como colección de requests (formato raw text)
+
+# 1. Crear un libro (POST)
+curl -X POST "http://localhost:8000/api/books/" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "Ejemplo de Libro",
+    "author": "Autor Ejemplo",
+    "published_date": "2023-01-01"
+}'
+
+# 2. Listar libros (GET)
+curl -X GET "http://localhost:8000/api/books/"
+
+# 2.1. Listar libros filtrando por autor
+curl -X GET "http://localhost:8000/api/books/?author=Autor%20Ejemplo"
+
+# 2.2. Listar libros filtrando por fecha de publicación
+curl -X GET "http://localhost:8000/api/books/?published_date_after=2023-01-01&published_date_before=2024-01-01"
+
+# 3. Obtener detalle de un libro (GET)
+curl -X GET "http://localhost:8000/api/books/1/"
+
+# 4. Actualizar un libro (PUT)
+curl -X PUT "http://localhost:8000/api/books/1/" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "Libro Actualizado",
+    "author": "Autor Actualizado",
+    "published_date": "2024-01-01"
+}'
+
+# 5. Actualización parcial (PATCH)
+curl -X PATCH "http://localhost:8000/api/books/1/" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "Solo el título actualizado"
+}'
+
+# 6. Eliminar un libro (DELETE)
+curl -X DELETE "http://localhost:8000/api/books/1/"
