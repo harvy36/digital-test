@@ -14,6 +14,7 @@ class BookViewSet(viewsets.ModelViewSet):
         "author": ["icontains"],
         "published_date": ["gte", "lte"],
     }
+    page_size = 10
 
     def list(self, request):
         queryset = self.filter_queryset(self.get_queryset())
@@ -21,6 +22,10 @@ class BookViewSet(viewsets.ModelViewSet):
         author = request.query_params.get("author", None)
         published_date_after = request.query_params.get("published_date_after", None)
         published_date_before = request.query_params.get("published_date_before", None)
+        page_size = request.query_params.get("page_size", self.page_size)
+
+        if page_size.isdigit() and int(page_size) > 0:
+            self.page_size = int(page_size)
 
         # Validation
         if (
