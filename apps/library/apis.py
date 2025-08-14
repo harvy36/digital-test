@@ -24,7 +24,7 @@ class BookViewSet(viewsets.ModelViewSet):
         published_date_before = request.query_params.get("published_date_before", None)
         page_size = request.query_params.get("page_size", self.page_size)
 
-        if page_size.isdigit() and int(page_size) > 0:
+        if int(page_size) > 0:
             self.page_size = int(page_size)
 
         # Validation

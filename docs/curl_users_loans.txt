@@ -1,0 +1,45 @@
+# Ejemplos curl para pruebas de los endpoints de Member, Loan y Login
+# Modifica los datos según corresponda a tu entorno y usuarios
+
+# 1. Login (obtener token)
+curl -X POST "http://localhost:8000/login/" \
+    -H "Content-Type: application/json" \
+    -d '{
+        "email": "usuario@ejemplo.com",
+        "password": "tu_password"
+}'
+
+# 2. Crear un miembro (requiere token staff)
+curl -X POST "http://localhost:8000/users/api/members/" \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Token TU_TOKEN_AQUI" \
+    -d '{
+        "email": "nuevo@ejemplo.com",
+        "name": "Nuevo Miembro",
+        "role": "staff"
+}'
+
+# 3. Listar miembros (requiere token staff)
+curl -X GET "http://localhost:8000/users/api/members/" \
+    -H "Authorization: Token TU_TOKEN_AQUI"
+
+# 4. Crear un préstamo (requiere token staff)
+curl -X POST "http://localhost:8000/users/api/loans/" \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Token TU_TOKEN_AQUI" \
+    -d '{
+        "book": 1,
+        "member": 1
+}'
+
+# 5. Listar préstamos (token staff o usuario)
+curl -X GET "http://localhost:8000/users/api/loans/" \
+    -H "Authorization: Token TU_TOKEN_AQUI"
+
+# 6. Filtrar préstamos activos
+curl -X GET "http://localhost:8000/users/api/loans/?active=true" \
+    -H "Authorization: Token TU_TOKEN_AQUI"
+
+# 7. Devolver un préstamo (POST a /loans/{id}/return/)
+curl -X POST "http://localhost:8000/users/api/loans/1/return/" \
+    -H "Authorization: Token TU_TOKEN_AQUI"

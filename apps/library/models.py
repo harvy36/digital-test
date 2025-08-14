@@ -28,3 +28,6 @@ class Book(models.Model):
                 violation_error_message="El ISBN debe ser único. Ya existe un libro con este ISBN.",
             ),
         ]
+
+    def __str__(self):
+        return self.title

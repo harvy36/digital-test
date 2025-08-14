@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_filters",
     "rest_framework",
+    "rest_framework.authtoken",
     "apps.library",
+    "apps.users",
 ]
 
 MIDDLEWARE = [
@@ -52,6 +54,12 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+    ],
+}
 
 ROOT_URLCONF = "digital_test.urls"
 

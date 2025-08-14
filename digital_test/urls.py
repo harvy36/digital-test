@@ -18,8 +18,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from apps.library import urls as library_urls
+from apps.users import urls as users_urls
+from apps.users.apis import LoginView
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("library/", include(library_urls)),
+    path("users/", include(users_urls)),
+    path("login/", LoginView.as_view(), name="login"),
 ]
